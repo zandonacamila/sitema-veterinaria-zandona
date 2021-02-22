@@ -39,25 +39,25 @@
 
 ## BUGS/MELHORIAS
 
-* não há required nos campos <select> |
+- não há required nos campos <select> |
 
-* não foi possível gravar o medicamento receitado nem suas informações(código, nome, descrição) |
+- não foi possível gravar o medicamento receitado nem suas informações(código, nome, descrição) |
 
-* a especialidade ficou travada em um valor por falta de tempo |
+- a especialidade ficou travada em um valor por falta de tempo |
 
-* não é feita validação no banco para consultar se o animal já é registrado na clínica | 
+- não é feita validação no banco para consultar se o animal já é registrado na clínica | 
 
-* não existe agenda com a disponibilidade dos médicos | 
+- não existe agenda com a disponibilidade dos médicos | 
 
-* os médicos não estão ligados à especialidade, nem à espécie - fica a cargo de quem registra a consulta, registrar médico e especialidade | 
+- os médicos não estão ligados à especialidade, nem à espécie - fica a cargo de quem registra a consulta, registrar médico e especialidade | 
 
-* o veterinário responsável não é informado na tela "/detalhesConsulta?{id}" | 
+- o veterinário responsável não é informado na tela "/detalhesConsulta?{id}" | 
 
-* não foi feito tratamento de erros ou comentários nos métodos, por falta de tempo | 
+- não foi feito tratamento de erros ou comentários nos métodos, por falta de tempo | 
 
-* a raça não é considerada para agendar consultas, cadastrar animais ou selecionar médicos | 
+- a raça não é considerada para agendar consultas, cadastrar animais ou selecionar médicos | 
 
-* a duração, a descrição e o medicamento não ficam registrados em tratamento 
+- a duração, a descrição e o medicamento não ficam registrados em tratamento 
 
 
 
