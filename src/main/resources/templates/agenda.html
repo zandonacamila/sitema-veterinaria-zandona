@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Veterinária Zandoná</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- Main CSS-->
+<link href="css/main.css" rel="stylesheet" media="all">
+
+</head>
+<body>
+	<div class="container">
+		<div th:insert="fragments/menu :: menu"></div>
+		<h4>Tela para visualizar consultas:</h4>
+		<br>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Nome do animal</th>
+					<th scope="col">Nome do dono</th>
+					<th scope="col">CPF do dono</th>
+					<th scope="col">Data da consulta</th>
+					<th scope="col">Deletar Consulta</th>
+				</tr>
+			</thead>
+			<tbody th:each="consulta : ${consultas}">
+
+				<tr>
+					<td th:text="${consulta.animal.nomeAnimal}"></td>
+					<td th:text="${consulta.animal.nomeDono}"></td>
+					<td th:text="${consulta.animal.cpfDono}"></td>
+					<td th:text="${consulta.data} + ' ' + ${consulta.hora}"></td>
+					<td>
+						<form action="#" th:action="@{/deletaConsulta}"
+							th:object="${consulta}" method="post">
+							<input type="hidden" th:value="${consulta.id}" th:name="id"/>
+							<input type="hidden" th:value="${consulta.animal.nomeAnimal}" />
+							<input type="hidden" th:value="${consulta.animal.nomeDono}" />
+							<input type="hidden" th:value="${consulta.animal.cpfDono}" />
+							<input type="hidden" th:value="${consulta.animal.nomeDono}" />
+							<input type="submit" value="DELETAR CONSULTA">
+						</form>
+					</td>
+					<!-- <td th:text="${consulta.hora}"></td> -->
+
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

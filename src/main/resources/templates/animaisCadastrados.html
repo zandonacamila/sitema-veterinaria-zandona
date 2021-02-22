@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Veterinária Zandoná</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- Latest compiled and minified CSS -->
+
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- Main CSS-->
+<link href="css/main.css" rel="stylesheet" media="all">
+</head>
+<body>
+	<div class="container">
+		<div th:insert="fragments/menu :: menu"></div>
+		<h1>Animais cadastrados</h1>
+		<form action="chamaAnimais" th:action="@{/chamaAnimal}"
+			th:object="${especies}" method="post">
+			<div class="row row-space">
+				<div class="col-2">
+					<div class="input-group">
+						<select class="form-control" th:field="${animal.especie.id}"
+							id="dropOperator">
+							<option option="selected" value="0">Selecione uma
+								espécie</option>
+							<option th:each="especie : ${especies}" th:value="${especie.id}"
+								th:text="${especie.nome}"></option>
+						</select> <input type="submit" value="Escolher" th:attr="value={especie.id}" />
+					</div>
+				</div>
+			</div>
+			<table>
+				<th:block th:each="animal : ${animais}">
+					<tr>
+						<td th:text="${animal.nomeAnimal}">...</td>
+						<td th:text="${animal.idadeAnimal}">...</td>
+						<td th:text="${animal.nomeDono}">...</td>
+						<td th:text="${animal.cpfDono}">...</td>
+						<td th:text="${animal.ruaDono}">...</td>
+						<td th:text="${animal.numeroDono}">...</td>
+						<td th:text="${animal.telefoneDono}">...</td>
+					</tr>
+					<tr>
+						<td colspan="2" th:text="${user.address}">...</td>
+					</tr>
+
+				</th:block>
+			</table>
+		</form>
+
+	</div>
+</body>
+</html>

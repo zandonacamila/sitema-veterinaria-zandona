@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Veterinária Zandoná</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- Main CSS-->
+<link href="css/main.css" rel="stylesheet" media="all">
+
+</head>
+<body>
+	<div class="container">
+		<div th:insert="fragments/menu :: menu"></div>
+
+
+		<div class="page-wrapper p-t-130 p-b-100 font-poppins">
+			<div class="wrapper wrapper--w680">
+				<div class="card card-4">
+					<div class="card-body">
+						<h2 class="title">Detalhes da consulta</h2>
+
+						<form action="#" th:action="@{/consultaAlterada}"
+							th:object="${consulta}" method="post">
+							<input type="hidden" th:value="${consulta.id}" />
+	
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Nome do animal: </label> <input
+											class="input--style-4" type="text"
+											th:field="*{animal.nomeAnimal}"  disabled>
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Idade do animal:</label> <input
+											class="input--style-4" type="text"
+											th:field="*{animal.idadeAnimal}"  disabled>
+									</div>
+								</div>
+							</div>
+
+							
+							<div class="row row-space">
+								
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Diagnóstico: </label>
+										<textarea class="input--style-4" type="text"
+											th:field="*{diagnostico}" disabled>
+											</textarea>
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Valor: </label>
+										<textarea class="input--style-4" type="text"
+											th:field="*{valor}" disabled>
+											</textarea>
+									</div>
+								</div>
+							</div>
+
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Data:</label> <input
+											class="input--style-4" type="text" th:field="*{data}"
+											 disabled>
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Hora:</label> <input
+											class="input--style-4" type="text" th:field="*{hora}"
+											 disabled>
+									</div>
+								</div>
+							</div>
+							
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

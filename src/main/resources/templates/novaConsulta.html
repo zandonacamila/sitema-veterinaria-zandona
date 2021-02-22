@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Veterinária Zandoná</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- Main CSS-->
+<link href="css/main.css" rel="stylesheet" media="all">
+
+</head>
+<body>
+	<div class="container">
+		<div th:insert="fragments/menu :: menu"></div>
+
+
+		<div class="page-wrapper p-t-130 p-b-100 font-poppins">
+			<div class="wrapper wrapper--w680">
+				<div class="card card-4">
+					<div class="card-body">
+						<div class="alert alert-success" th:if="${message}"
+							th:text="${message}" id="message"></div>
+						<form action="#" th:action="@{/agendaNovaConsulta}"
+							th:object="${consulta}" method="post">
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Data:</label> <input
+											class="input--style-4" type="text" th:field="*{data}" required>
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Hora:</label> <input 
+											class="input--style-4" type="text" th:field="*{hora}" required>
+									</div>
+								</div>
+							</div>
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Selecione Médico:</label> <select
+											class="input--style-4" th:field="${consulta.medico.crv}"
+											id="dropOperator" required>
+											<option value="0">Selecione um médico:</option>
+											<option th:each="medico : ${medicos}"
+												th:value="${medico.crv}" th:text="${medico.nome}"></option>
+										</select>
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Selecione Especialidade:</label> <select
+											class="input--style-4"
+											th:field="${consulta.medico.especialidades}"
+											id="dropOperator" required>
+											<option value="0">Selecione uma especialidade:</option>
+											<option th:each="especialidade : ${especialidades}"
+												th:value="${especialidade.id}"
+												th:text="${especialidade.nome}"></option>
+										</select>
+									</div>
+								</div>
+
+							</div>
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Selecione Animal:</label> <select
+											class="input--style-4" th:field="${consulta.animal.id}"
+											id="dropOperator" required>
+											<option value="0">Selecione um animal:</option>
+											<option th:each="animal : ${animais}" th:value="${animal.id}"
+												th:text="${animal.nomeAnimal}"></option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Selecione Atendimento:</label> <select
+											class="input--style-4" th:field="${consulta.atendimentoTipo}"
+											id="dropOperator" required>
+											<option value="0">Selecione um Atendimento:</option>
+											<option th:each="tipo : ${tiposAtendimento}"
+												th:value="${tipo.id}" th:text="${tipo.atendimentoTipo}"></option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="p-t-15">
+								<input type="submit" value="Cadastrar" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			$('#message').delay(5000).fadeOut('slow');
+		});
+	</script>
+</body>
+</html>

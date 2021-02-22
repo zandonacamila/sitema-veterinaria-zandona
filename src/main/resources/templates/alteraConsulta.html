@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Veterinária Zandoná</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- Main CSS-->
+<link href="css/main.css" rel="stylesheet" media="all">
+
+</head>
+<body>
+	<div class="container">
+		<div th:insert="fragments/menu :: menu"></div>
+
+
+		<div class="page-wrapper p-t-130 p-b-100 font-poppins">
+			<div class="wrapper wrapper--w680">
+				<div class="card card-4">
+					<div class="card-body">
+						<h2 class="title">Detalhes da consulta</h2>
+						<div class="alert alert-success" th:if="${message}"
+							th:text="${message}"></div>
+
+						<form action="#" th:action="@{/consultaAlterada}"
+							th:object="${consulta}" method="post">
+							<input type="hidden" th:value="${consulta.id}" th:name="id" /> <input
+								type="hidden" th:value="${consulta.animal.id}"
+								th:name="idAnimal" />
+							<input type="hidden" th:field="*{valor}" /> 
+							<!-- <input type="hidden" th:value="${consulta.tratamento.medicamento.id}" th:name="quantidadeMedicamento" /> 
+							<input type="hidden" th:value="${consulta.tratamento.medicamento.id}" th:name="vezesAoDia" />  -->
+
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Nome do animal: </label> <input
+											class="input--style-4" type="text"
+											th:field="*{animal.nomeAnimal}">
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Idade do animal:</label> <input
+											class="input--style-4" type="text"
+											th:field="*{animal.idadeAnimal}">
+									</div>
+								</div>
+							</div>
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Cpf do dono:</label> <input
+											class="input--style-4" type="text"
+											th:field="*{animal.cpfDono}">
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Nome do dono:</label> <input
+											class="input--style-4" type="text"
+											th:field="*{animal.nomeDono}">
+									</div>
+								</div>
+							</div>
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Selecione Atendimento:</label> <select
+											class="input--style-4" th:field="${consulta.atendimentoTipo}"
+											id="dropOperator">
+											<option value="0">Selecione um Atendimento:</option>
+											<option th:each="tipo : ${tiposAtendimento}"
+												th:value="${tipo.id}" th:text="${tipo.atendimentoTipo}"></option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Selecione Profissional:</label> <select
+											class="input--style-4" th:field="${consulta.medico}"
+											id="dropOperator">
+											<option value="0">Selecione um Médico:</option>
+											<option th:each="medico : ${medicos}"
+												th:value="${medico.crv}" th:text="${medico.nome}"
+												th:name="medico.crv"></option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Selecione Especialidade:</label> <select
+											class="input--style-4"
+											th:field="${consulta.medico.especialidades}"
+											id="dropOperator">
+											<option value="0">Selecione uma especialidade:</option>
+											<option th:each="especialidade : ${especialidades}"
+												th:value="${especialidade.id}"
+												th:text="${especialidade.nome}" th:name="especialidade.id"></option>
+										</select>
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Tratamento: </label>
+										<textarea class="input--style-4" type="text"
+											th:field="*{tratamento.descricao}">
+											</textarea>
+									</div>
+								</div>
+
+							</div>
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Exames pedidos:</label>
+										<div class="checkbox" th:field="*{exame}">
+											<ul>
+												<li th:each="exame : ${exames}"><label
+													th:for="${exame.nome}" th:text="${exame.nome}"></label> <input
+													type="checkbox" th:id="${exame.id}" th:field="*{exame.id}"
+													th:value="${exame.id}" /></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Diagnóstico: </label>
+										<textarea class="input--style-4" type="text"
+											th:field="*{diagnostico}">
+											</textarea>
+									</div>
+								</div>
+							</div>
+							<div class="row row-space">
+								<div class="p-t-15">
+									<div class="input-group">
+										<div class="row row-space">
+											<div>
+												<label class="label" for="nomeMedicamento">Nomes dos
+													medicamentos:</label>
+												<textarea class="input--style-4"
+													th:field="*{tratamento.medicamento.nome}"></textarea>
+											</div>
+
+											<div>
+												<label class="label" for="quantidadeMedicamento">Quantidade:</label>
+												<textarea id="quantidadeMedicamento" class="input--style-4"
+													th:field="*{tratamento.medicamento.quantidade}"></textarea>
+											</div>
+										</div>
+										<div class="row row-space">
+											<div>
+												<label class="label" for="vezesAoDia">Vezes ao dia:</label>
+												<textarea id="vezesAoDia" class="input--style-4"
+													th:field="*{tratamento.medicamento.vezesAoDia}"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Data:</label> <input
+											class="input--style-4" type="text" th:field="*{data}">
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Hora:</label> <input
+											class="input--style-4" type="text" th:field="*{hora}">
+									</div>
+								</div>
+							</div>
+
+							<div class="p-t-15">
+								<input action="#" type="submit" value="Finalizar consulta" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

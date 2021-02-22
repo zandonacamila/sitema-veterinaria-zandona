@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Veterinária Zandoná</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- Latest compiled and minified CSS -->
+
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	
+<!-- Main CSS-->
+<link href="css/main.css" rel="stylesheet" media="all">
+</head>
+<body>
+	<div class="container">
+		<div th:insert="fragments/menu :: menu"></div>
+
+		<div class="page-wrapper p-t-130 p-b-100 font-poppins">
+			<div class="wrapper wrapper--w680">
+				<div class="card card-4">
+					<div class="card-body">
+						<h2 class="title">Cadastro de animal</h2>
+						<div class="alert alert-success" th:if="${message}" th:text="${message}" id="message">
+						</div>
+						<form action="#" th:action="@{/cadastraAnimal}" th:object="${animal}" method="post">
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Nome:</label> <input
+											class="input--style-4" type="text" th:field="*{nomeAnimal}" required>
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Idade:</label> <input
+											class="input--style-4" type="number"
+											th:field="*{idadeAnimal}" required>
+									</div>
+								</div>
+							</div>
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+									<label class="label">Espécie:</label>
+										<select class="input--style-4" th:field="${animal.especie.id}"
+											id="dropOperator" required>
+											<option value="0">Selecione uma espécie</option>
+											<option th:each="especie : ${especies}"
+												th:value="${especie.id}" th:text="${especie.nome}"></option>
+										</select>
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">CPF do dono:</label> <input
+											class="input--style-4" type="number" th:field="*{cpfDono}" required>
+									</div>
+								</div>
+							</div>
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Nome do dono:</label> <input
+											class="input--style-4" type="text" th:field="*{nomeDono}" required>
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Endereço do dono:</label> <input
+											class="input--style-4" type="text" th:field="*{ruaDono}" required>
+									</div>
+								</div>
+							</div>
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Número da residência:</label> <input
+											class="input--style-4" type="number" th:field="*{numeroDono}" required>
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="input-group">
+										<label class="label">Telefone do dono:</label> <input
+											class="input--style-4" type="number" th:field="*{telefoneDono}" required>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="p-t-15">
+								<input type="submit" value="Cadastrar" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			$('#message').delay(5000).fadeOut('slow');
+		});
+	</script>
+</body>
+</html>
