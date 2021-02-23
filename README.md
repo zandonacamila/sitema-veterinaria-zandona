@@ -59,6 +59,10 @@
 
 - a duração, a descrição e o medicamento não ficam registrados em tratamento 
 
+- não há autenticação para acessar a tela do médico
+
+- formatar valores e datas
+
 
 
 
