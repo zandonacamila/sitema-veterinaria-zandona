@@ -37,11 +37,11 @@
 			<tbody th:each="consulta : ${consultas}">
 
 				<tr>
-					<td th:text="${consulta.animal.nomeAnimal}"></td>
-					<td th:text="${consulta.animal.nomeDono}"></td>
-					<td th:text="${consulta.animal.cpfDono}"></td>
-					<td th:text="${consulta.diagnostico}"></td>
-					<td th:text="${consulta.data} + ' ' + ${consulta.hora}"></td>
+					<td th:text="*{consulta.animal.nomeAnimal}"></td>
+					<td th:text="*{consulta.animal.nomeDono}"></td>
+					<td th:text="*{consulta.animal.cpfDono}"></td>
+					<td th:text="*{consulta.diagnostico}"></td>
+					<td th:text="*{consulta.data} + ' ' + ${consulta.hora}"></td>
 					<td>
 						<form action="#" th:action="@{/detalhesConsulta}"
 							th:object="${consulta}" >

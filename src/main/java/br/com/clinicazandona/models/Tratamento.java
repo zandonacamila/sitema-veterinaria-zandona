@@ -14,7 +14,7 @@ public class Tratamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
 	private Medicamento medicamento;
 	
 	private Integer duracaoEmDias;

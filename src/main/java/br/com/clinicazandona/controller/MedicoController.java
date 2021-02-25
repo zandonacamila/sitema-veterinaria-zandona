@@ -60,6 +60,7 @@ public class MedicoController {
 		List<Medico> medicos = consultaService.buscaProfissionais();
 		List<Exame> exames = consultaService.buscaExames();
 		List<Especialidade> especialidades = consultaService.buscaEspecialidades();
+		List<Tratamento> tratamentos = consultaService.buscaTratamentos();
 		List<Medicamento> medicamentos = consultaService.buscaMedicamentos();
 		model.addAttribute("consultas", consultaService.buscaTodasConsultas());
 		model.addAttribute("consulta", consulta);
@@ -68,6 +69,7 @@ public class MedicoController {
 		model.addAttribute("medicamentos", medicamentos);
 		model.addAttribute("tiposAtendimento", tiposAtendimento);
 		model.addAttribute("especialidades", especialidades);
+		model.addAttribute("tratamentos", tratamentos);
 
 		return "alteraConsulta";
 	}
@@ -76,15 +78,21 @@ public class MedicoController {
 	public String cadastraConsultaAlterada(
 			@RequestParam(value="id", required = false) Integer id, 
 			@RequestParam(value="idAnimal", required = false) Integer idAnimal,
+			@RequestParam(value="idTratamento", required = false) Integer idTratamento,
 			@ModelAttribute Consulta consulta, 
 			@ModelAttribute Animal animal, 
 			@ModelAttribute Especialidade especialidade, 
 			@ModelAttribute Tratamento tratamento, 
 			Model model, 
 			RedirectAttributes redirAttrs) {
+		
+		try {
+			consultaService.atualizaConsulta(consulta, idAnimal, idTratamento);
+			redirAttrs.addFlashAttribute("message", "Consulta alterada com sucesso!");
+		} catch (Exception e) {
+			redirAttrs.addFlashAttribute("errorMessage",e.getMessage());
+		}
 
-		consultaService.atualizaConsulta(consulta, idAnimal);
-		redirAttrs.addFlashAttribute("message", "Consulta alterada com sucesso!");
 		return "redirect:/telaDoMedico";
 	}
 }

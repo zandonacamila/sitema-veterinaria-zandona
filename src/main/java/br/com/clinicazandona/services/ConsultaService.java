@@ -13,6 +13,7 @@ import br.com.clinicazandona.models.Especialidade;
 import br.com.clinicazandona.models.Exame;
 import br.com.clinicazandona.models.Medicamento;
 import br.com.clinicazandona.models.Medico;
+import br.com.clinicazandona.models.Tratamento;
 import br.com.clinicazandona.repositories.AnimalRepository;
 import br.com.clinicazandona.repositories.ConsultaRepository;
 import br.com.clinicazandona.repositories.EspecialidadeRepository;
@@ -49,13 +50,15 @@ public class ConsultaService {
 		consultaRepository.save(consulta);		
 	}
 	
-	public void atualizaConsulta(Consulta consulta, Integer idAnimal) {
+	public void atualizaConsulta(Consulta consulta, Integer idAnimal, Integer idTratamento) {
 		//Animal animalDaConsulta = animalRepository.getOne(consulta.getAnimal().getId());
 		//animalRepository.save(animalDaConsulta);
 //		consulta.setValor(getValorConsulta(consulta));
 //		Consulta consultaAAlterar = consultaRepository.getOne(consulta.getId());
 //		consultaAAlterar.setDiagnostico(consultaAAlterar.getDiagnostico());
 		consulta.getAnimal().setId(idAnimal);
+		consulta.getTratamento().setId(idTratamento);
+		consulta.getTratamento().setMedicamento(consulta.getTratamento().getMedicamento());
 		consultaRepository.save(consulta);
 	}
 	
@@ -109,19 +112,17 @@ public class ConsultaService {
 	public List<Medicamento> buscaMedicamentos() {
 		return medicamentoRepository.findAll();
 	}
-	
-//	public Double getValorConsulta(Consulta consulta) {
-//		
-//		return consulta.getExame().getValor() + consulta.getAtendimentoTipo().getValor();
-//		
-//	}
-	
+		
 	public void calculaConsulta(Consulta consulta) {
 		Optional<Especialidade> especialidadeConsulta = especialidadeRepository.findById(consulta.getMedico().getEspecialidades().get(0).getId());
 		Especialidade especialidade = especialidadeConsulta.get();
 		
 		Double valor = especialidade.getValor() + consulta.getAtendimentoTipo().getValor();
 		consulta.setValor(valor);
+	}
+	
+	public List<Tratamento> buscaTratamentos() {
+		return tratamentoRepository.findAll();
 	}
 
 }

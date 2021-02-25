@@ -30,13 +30,16 @@
 						<h2 class="title">Detalhes da consulta</h2>
 						<div class="alert alert-success" th:if="${message}"
 							th:text="${message}"></div>
+						<div class="alert alert-danger" th:if="${errorMessage}"
+							th:text="${errorMessage}"></div>
 
 						<form action="#" th:action="@{/consultaAlterada}"
 							th:object="${consulta}" method="post">
 							<input type="hidden" th:value="${consulta.id}" th:name="id" /> <input
 								type="hidden" th:value="${consulta.animal.id}"
-								th:name="idAnimal" />
-							<input type="hidden" th:field="*{valor}" /> 
+								th:name="idAnimal" /> <input type="hidden"
+								th:value="${consulta.tratamento.id}" th:name="idTratamento" />
+							<input type="hidden" th:field="*{valor}" />
 							<!-- <input type="hidden" th:value="${consulta.tratamento.medicamento.id}" th:name="quantidadeMedicamento" /> 
 							<input type="hidden" th:value="${consulta.tratamento.medicamento.id}" th:name="vezesAoDia" />  -->
 
@@ -152,20 +155,22 @@
 											<div>
 												<label class="label" for="nomeMedicamento">Nomes dos
 													medicamentos:</label>
-												<textarea class="input--style-4"
-													th:field="*{tratamento.medicamento.nome}"></textarea>
+												<textarea type="text"
+													th:field="*{tratamento.medicamento.nome}"
+													class="input--style-4"></textarea>
 											</div>
 
 											<div>
 												<label class="label" for="quantidadeMedicamento">Quantidade:</label>
-												<textarea id="quantidadeMedicamento" class="input--style-4"
+												<textarea id="quantidadeMedicamento" type="text"
+													class="input--style-4"
 													th:field="*{tratamento.medicamento.quantidade}"></textarea>
 											</div>
 										</div>
 										<div class="row row-space">
 											<div>
 												<label class="label" for="vezesAoDia">Vezes ao dia:</label>
-												<textarea id="vezesAoDia" class="input--style-4"
+												<textarea id="vezesAoDia" type="text" class="input--style-4"
 													th:field="*{tratamento.medicamento.vezesAoDia}"></textarea>
 											</div>
 										</div>

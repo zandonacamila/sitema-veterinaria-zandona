@@ -29,19 +29,24 @@
 					<div class="card-body">
 						<div class="alert alert-success" th:if="${message}"
 							th:text="${message}" id="message"></div>
+						<div class="alert alert-danger" th:if="${errorMessage}"
+							th:text="${errorMessage}"></div>
+							
 						<form action="#" th:action="@{/agendaNovaConsulta}"
 							th:object="${consulta}" method="post">
 							<div class="row row-space">
 								<div class="col-2">
 									<div class="input-group">
 										<label class="label">Data:</label> <input
-											class="input--style-4" type="text" th:field="*{data}" required>
+											class="input--style-4" type="text" th:field="*{data}"
+											required>
 									</div>
 								</div>
 								<div class="col-2">
 									<div class="input-group">
-										<label class="label">Hora:</label> <input 
-											class="input--style-4" type="text" th:field="*{hora}" required>
+										<label class="label">Hora:</label> <input
+											class="input--style-4" type="text" th:field="*{hora}"
+											required>
 									</div>
 								</div>
 							</div>

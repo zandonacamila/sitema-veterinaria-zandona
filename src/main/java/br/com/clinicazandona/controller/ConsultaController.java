@@ -45,12 +45,14 @@ public class ConsultaController {
 
 	@PostMapping("/agendaNovaConsulta")
 	public String cadastraNovaConsulta(@ModelAttribute Consulta consulta, Model model, RedirectAttributes redirAttrs) {
-		//Atendimento tiposAtendimento = consulta.getAtendimentoTipo();
-		//atendimentoService.salva(tiposAtendimento);
-		consultaService.calculaConsulta(consulta);
-		consultaService.salva(consulta);
-		redirAttrs.addFlashAttribute("message", "Consulta agendada com sucesso!");
-		return "redirect:/novaConsulta";
+		try {
+			consultaService.calculaConsulta(consulta);
+			consultaService.salva(consulta);
+			redirAttrs.addFlashAttribute("message", "Consulta agendada com sucesso!");
+		} catch(Exception e) {
+			redirAttrs.addFlashAttribute("errorMessage",e.getMessage());
+		}
+			return "redirect:/novaConsulta";
 	}
 	
 }

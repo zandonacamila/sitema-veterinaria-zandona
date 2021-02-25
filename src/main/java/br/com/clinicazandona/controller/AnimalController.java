@@ -44,8 +44,13 @@ public class AnimalController {
 
 	@PostMapping("/cadastraAnimal")
 	public String cadastraNovoAnimal(@ModelAttribute Animal animal, Model model, RedirectAttributes redirAttrs) {
-		animalService.salva(animal);
-		redirAttrs.addFlashAttribute("message", "Animal cadastrado com sucesso!");
+		try {
+			animalService.salva(animal);
+			redirAttrs.addFlashAttribute("message", "Animal cadastrado com sucesso!");
+		} catch(Exception e) {
+			redirAttrs.addFlashAttribute("errorMessage", e.getMessage());			
+		}
+
 		return "redirect:/novoAnimal";
 	}
 }
