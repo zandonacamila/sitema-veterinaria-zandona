@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Raca {
@@ -13,6 +14,16 @@ public class Raca {
 	private Integer id;
 	private String nome;
 	
+	@ManyToOne
+	private Especie especie;
+	
+	
+	public Especie getEspecie() {
+		return especie;
+	}
+	public void setEspecie(Especie especie) {
+		this.especie = especie;
+	}
 	public Integer getId() {
 		return id;
 	}

@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Atendimento {
@@ -14,6 +13,7 @@ public class Atendimento {
 	private Integer id;
 	private String atendimentoTipo;
 	private Double valor;
+	
 	public Integer getId() {
 		return id;
 	}
